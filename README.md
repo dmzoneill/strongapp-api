@@ -2,7 +2,7 @@
 
 ## Samples
 
-- [Samples](https://github.com/dmzoneill/strongapp-api/sample)
+- [Samples](https://github.com/dmzoneill/strongapp-api/tree/main/sample)
 
 ## Overviews
 
@@ -18,4 +18,3 @@
 - [get-workout-history.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-workout-history.md)
 - [log-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/log-session.md)
 - [update-user.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/update-user.md)
-
