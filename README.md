@@ -1,20 +1,21 @@
 # strong-api
 
+## Samples
+
+- [Samples](https://github.com/dmzoneill/strongapp-api/sample)
+
 ## Overviews
 
-- [create-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/create-workout.md)
-- [delete-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/delete-workout.md)
-- [get-total-workouts.md](https://github.com/dmzoneill/strongapp-api/blob/main/get-total-workouts.md)
-- [get-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/get-workout.md)
-- [login.md](https://github.com/dmzoneill/strongapp-api/blob/main/login.md)
-- [parsewidget.md](https://github.com/dmzoneill/strongapp-api/blob/main/parsewidget.md)
-- [update-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/update-workout.md)
-- [delete-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/delete-session.md)
-- [get-exercises.md](https://github.com/dmzoneill/strongapp-api/blob/main/get-exercises.md)
-- [get-workout-history.md](https://github.com/dmzoneill/strongapp-api/blob/main/get-workout-history.md)
-- [log-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/log-session.md)
-- [update-user.md](https://github.com/dmzoneill/strongapp-api/blob/main/update-user.md)
+- [create-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/create-workout.md)
+- [delete-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/delete-workout.md)
+- [get-total-workouts.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-total-workouts.md)
+- [get-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-workout.md)
+- [login.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/login.md)
+- [parsewidget.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/parsewidget.md)
+- [update-workout.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/update-workout.md)
+- [delete-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/delete-session.md)
+- [get-exercises.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-exercises.md)
+- [get-workout-history.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-workout-history.md)
+- [log-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/log-session.md)
+- [update-user.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/update-user.md)
 
-## Sample
-
-- [login.py](https://github.com/dmzoneill/strongapp-api/blob/main/sample/login.py)
