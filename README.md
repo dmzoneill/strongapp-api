@@ -18,3 +18,28 @@
 - [get-workout-history.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/get-workout-history.md)
 - [log-session.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/log-session.md)
 - [update-user.md](https://github.com/dmzoneill/strongapp-api/blob/main/api/update-user.md)
+
+## How to dissect https calls for yourself
+
+Download
+
+ - Android studio
+ - [Charles proxy](https://www.charlesproxy.com/)
+ - [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
+ - [io.strongapp.strong apk](https://m.apkpure.com/strong-workout-tracker-gym-log/io.strongapp.strong)
+
+Setup
+
+ - Open android studio
+ - Create an android virtual device
+ - Boot the device
+ - Download the strong app apk
+ - Download apk-mitm
+ - Patch the apk as described on [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
+ - Install charles proxy
+ - Install the certificate and setup the proxy on the android device as described here:
+ https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/
+  - Using androind studio upload the patched APK to the android device and then install it
+  - open strong app and login
+
+Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.

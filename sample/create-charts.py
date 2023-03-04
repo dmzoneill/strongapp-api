@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import json
 
+path = "graphs/"
+
 plt.style.use(
     'https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle')
 
@@ -66,6 +68,11 @@ for session in sessions_obj:
             del (stats[name][date])
 
 
+save_file = open("stats.json", "w")
+save_file.write(json.dumps(stats))
+save_file.close()
+
+
 for exercise in stats.keys():
     if len(list(stats[exercise].keys())) < 10:
         continue
@@ -91,7 +98,8 @@ for exercise in stats.keys():
     plt.xticks(rotation=45, ha='right')
     plt.grid(True)
     # plt.show()
-    plt.savefig(exercise + '-volume.png', bbox_inches='tight')
+    plt.savefig(path + exercise + '-volume.png', bbox_inches='tight')
+    plt.close()
 
 
 for exercise in stats.keys():
@@ -119,7 +127,8 @@ for exercise in stats.keys():
     plt.xticks(rotation=45, ha='right')
     plt.grid(True)
     # plt.show()
-    plt.savefig(exercise + '-reps.png', bbox_inches='tight')
+    plt.savefig(path + exercise + '-reps.png', bbox_inches='tight')
+    plt.close()
 
 
 for exercise in stats.keys():
@@ -147,4 +156,5 @@ for exercise in stats.keys():
     plt.xticks(rotation=45, ha='right')
     plt.grid(True)
     # plt.show()
-    plt.savefig(exercise + '-weight.png', bbox_inches='tight')
+    plt.savefig(path + exercise + '-weight.png', bbox_inches='tight')
+    plt.close()
