@@ -4,7 +4,7 @@
 
 - [Samples](https://github.com/dmzoneill/strongapp-api/tree/main/sample)
 - [Python pyplot example](https://dmzoneill.github.io/strongapp-api/sample/chart.html)
-- [Chart js example](https://dmzoneill.github.io/strongapp-api/sample/chart.html)
+- [Chart js example](https://dmzoneill.github.io/strongapp-api/sample/5.chart.html)
 
 ![Bench press](https://github.com/dmzoneill/strongapp-api/blob/main/img/sample.png?raw=true)
 
