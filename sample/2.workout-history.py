@@ -93,7 +93,7 @@ class Strong:
 
         self.WebRequest("POST", "/parse/classes/ParseWorkout", data)
 
-        save_file = open("stats.json", "w")
+        save_file = open("workouts.json", "w")
         save_file.write(self.response.text)
         save_file.close()
 
