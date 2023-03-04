@@ -18,7 +18,7 @@ headers = {
     'cache-control': 'no-cache',
 }
 
-data = '{"include":"parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise","limit":"0","count":"1","where":"{\\user\\:{\\__type\\:\\Pointer\\,\\className\\:\\_User\\,\\objectId\\:\\NMmP317FZG\\},\\updatedAt\\:{\\$gt\\:{\\__type\\:\\Date\\,\\iso\\:\\1970-01-01T00:00:00.000Z\\}}}","_method":"GET"}'
+data = '{"include":"parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise","limit":"0","count":"1","where":"{\\user\\:{\\__type\\:\\Pointer\\,\\className\\:\\_User\\,\\objectId\\:\\XXXXXXXX\\},\\updatedAt\\:{\\$gt\\:{\\__type\\:\\Date\\,\\iso\\:\\1970-01-01T00:00:00.000Z\\}}}","_method":"GET"}'
 
 response = requests.post('https://ws13.strongapp.co/parse/classes/ParseWorkout', headers=headers, data=data)
 ```

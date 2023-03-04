@@ -49,7 +49,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '9d7f1579-a591-46b8-be65-58c1daa76fdd',
                 'isHidden': 1,

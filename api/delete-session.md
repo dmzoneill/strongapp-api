@@ -50,7 +50,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '022fca24-9fde-4a00-8ee7-7fff510cc5ad',
                 'startDate': {

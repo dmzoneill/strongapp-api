@@ -79,7 +79,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '4874e63b-4177-4edc-9e84-d50fb7412692',
                 'isHidden': 0,
@@ -133,7 +133,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '39d2ddd0-0dfa-406f-aa17-3520daad4165',
                 'isHidden': 0,
@@ -151,7 +151,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'isHidden': 0,
                 'objectId': 'gMBFTfTU1K',
@@ -204,7 +204,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': 'ffd55399-5bdc-4009-960e-f69dbdeaa2e7',
                 'isHidden': 0,
@@ -278,7 +278,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '94e48277-ef3b-4a98-b7e4-d4859d1d7936',
                 'isHidden': 0,
@@ -334,7 +334,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '5e5375dc-d1f2-4a65-a9df-81976d7e088b',
                 'isHidden': 0,
@@ -397,7 +397,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': 'b3502172-c9a8-4fb0-83dd-f14f3154a63c',
                 'isHidden': 0,
@@ -471,7 +471,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '709e1f4d-6a3c-4aae-9240-2c7139c4562b',
                 'isHidden': 0,
@@ -519,7 +519,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': '9e44cee3-b12e-46e9-8bbd-6643ac46d65c',
                 'isHidden': 0,
@@ -528,13 +528,13 @@ json_data = {
         },
         {
             'method': 'PUT',
-            'path': '/parse/classes/_User/NMmP317FZG',
+            'path': '/parse/classes/_User/XXXXXXXX',
             'body': {
                 'lastVersion': '2.7.9 (257)',
                 'persistentNotes': {},
                 'hasPurchasedUnlockStrong': False,
                 'ACL': {
-                    'NMmP317FZG': {
+                    'XXXXXXXX': {
                         'read': True,
                         'write': True,
                     },
@@ -638,7 +638,7 @@ json_data = {
                 'weightUnitValue': 14,
                 'username': 'bitwiseshift',
                 'goals': '{}',
-                'objectId': 'NMmP317FZG',
+                'objectId': 'XXXXXXXX',
             },
         },
         {
@@ -666,7 +666,7 @@ json_data = {
                 'user': {
                     '__type': 'Pointer',
                     'className': '_User',
-                    'objectId': 'NMmP317FZG',
+                    'objectId': 'XXXXXXXX',
                 },
                 'uniqueId': 'fd61b7e0-e6cb-4e6e-ab45-a8454fb8fb37',
                 'isHidden': 0,
