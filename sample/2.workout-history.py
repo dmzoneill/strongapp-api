@@ -91,9 +91,11 @@ class Strong:
         data["where"] = json.dumps(where).replace('"', '\"')
         data["_method"] = "GET"
 
-        pprint(data)
-
         self.WebRequest("POST", "/parse/classes/ParseWorkout", data)
+
+        save_file = open("stats.json", "w")
+        save_file.write(self.response.text)
+        save_file.close()
 
     def GetWorkOutsPerWeek(self):
         where = {}
@@ -134,5 +136,4 @@ s.Login()
 s.GetUser()
 s.GetWorkouts()
 s.GetWorkOutsCount()
-s.GetWorkouts()
 s.GetWorkOutsPerWeek()

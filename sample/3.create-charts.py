@@ -45,8 +45,6 @@ for session in sessions_obj:
             stats[name][date]["max_weight"] = 0
             stats[name][date]["average_weight"] = 0
 
-            # pprint(exercise)
-
             average_count = 0
             average = 0
 
@@ -66,11 +64,6 @@ for session in sessions_obj:
 
         if stats[name][date]["total_volume"] == 0 or stats[name][date]["total_reps"] == 0:
             del (stats[name][date])
-
-
-save_file = open("stats.json", "w")
-save_file.write(json.dumps(stats))
-save_file.close()
 
 
 for exercise in stats.keys():
