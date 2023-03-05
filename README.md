@@ -25,25 +25,25 @@
 
 ## How to dissect https calls for yourself
 
-Download
+### Download
 
  - Android studio
  - [Charles proxy](https://www.charlesproxy.com/)
  - [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
  - [io.strongapp.strong apk](https://m.apkpure.com/strong-workout-tracker-gym-log/io.strongapp.strong)
 
-Setup
+### Setup
 
- - Open android studio
- - Create an android virtual device
- - Boot the device
- - Download the strong app apk
- - Download apk-mitm
- - Patch the apk as described on [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
- - Install charles proxy
- - Install the certificate and setup the proxy on the android device as described here:
+1. Open android studio
+2. Create an android virtual device
+3. Boot the device
+4. Download the strong app apk
+5. Download apk-mitm
+6. Patch the apk as described on [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
+7. Install charles proxy
+8. Install the certificate and setup the proxy on the android device as described here:
  https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/
-  - Using androind studio upload the patched APK to the android device and then install it
-  - open strong app and login
+9. Using androind studio upload the patched APK to the android device and then install it
+10. open strong app and login
 
 Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.
