@@ -5,7 +5,7 @@ I leave this here for reference purposes only.
 This should not be used unless you plan on getting your account terminated.  
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
 I've switched to using hevy and may do some work over there.  
-[https://github.com/dmzoneill/hevyapp-api][https://github.com/dmzoneill/hevyapp-api]
+[https://github.com/dmzoneill/hevyapp-api](https://github.com/dmzoneill/hevyapp-api)
 
 Adios!
 
