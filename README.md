@@ -5,12 +5,18 @@ This should not be used unless you plan on getting your account terminated or ot
 Unlawful use of an API could be determined illegal depending on your durisdiction, like unlawful entery into a house with an open door.  
 
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
-I've cancelled my subscription with strong and I've switched to using hevy. I may do some work over there.  
+I've cancelled my subscription with strong and I've switched to using hevy.  
+I'm no longer using the strong service and only used this for a short period of time.  
+At the time of writing the API, there was no expressed defintion of access to their API or otherwise, in there terms of service.  
+As per my email below to Cameron.  
+
+Since i've switched to using Hevy, i may do some work over there.  
 [https://github.com/dmzoneill/hevyapp-api](https://github.com/dmzoneill/hevyapp-api)
 
 Adios!
 
-![image](https://user-images.githubusercontent.com/15192260/223525656-8b9007ea-f496-4626-9101-572153b5549d.png)
+![image](https://user-images.githubusercontent.com/15192260/223532596-83b5856b-a620-41e5-aa61-ed257e9ab939.png)
+
 
 
 ![Bench press](https://github.com/dmzoneill/strongapp-api/blob/main/img/sample.png?raw=true)
