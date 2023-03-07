@@ -7,7 +7,7 @@ Unlawful use of an API could be determined illegal depending on your durisdictio
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
 I've cancelled my subscription with strong and I've switched to using hevy.  
 I'm no longer using the strong service and only used this for a short period of time.  
-At the time of writing the API, there was no expressed defintion of access to their API or otherwise, in there terms of service.  
+At the time of writing the API, there was no expressed defintion of access to their API or otherwise, in their terms of service.  
 As per my email below to Cameron.  
 
 Since i've switched to using Hevy, i may do some work over there.  
