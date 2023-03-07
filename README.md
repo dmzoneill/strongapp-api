@@ -2,7 +2,7 @@
 
 I'm not currently developing this any more.  I leave this here for reference purposes only.  
 This should not be used unless you plan on getting your account terminated or other possible consequences.  
-Unlawful use of an API could be determined allegal depending on your countries laws, like unlawful entery into a house with an open door.  
+Unlawful use of an API could be determined illegal depending on your durisdiction, like unlawful entery into a house with an open door.  
 
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
 I've cancelled my subscription with strong and I've switched to using hevy. I may do some work over there.  
