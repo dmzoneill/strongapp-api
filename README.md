@@ -15,10 +15,6 @@ Since i've switched to using Hevy, i may do some work over there.
 
 Adios!
 
-![image](https://user-images.githubusercontent.com/15192260/223532596-83b5856b-a620-41e5-aa61-ed257e9ab939.png)
-
-
-
 ![Bench press](https://github.com/dmzoneill/strongapp-api/blob/main/img/sample.png?raw=true)
 
 ## Samples
@@ -66,3 +62,6 @@ Adios!
 10. open strong app and login
 
 Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.
+
+## Strong conversation
+![image](https://user-images.githubusercontent.com/15192260/223532596-83b5856b-a620-41e5-aa61-ed257e9ab939.png)
