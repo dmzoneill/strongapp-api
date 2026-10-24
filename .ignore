@@ -1,0 +1,5 @@
+# Generated: API reference pages that are mostly raw HTTP responses captured from the Strong app's
+# Parse backend (ws13.strongapp.co), pasted verbatim (repeated workout/set JSON objects).
+api/get-workout.md
+api/get-workout-history.md
+api/update-workout.md
