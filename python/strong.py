@@ -1,180 +1,162 @@
-from pprint import pprint
-import requests
-from requests_toolbelt.utils import dump
+"""Minimal client for the Strong app's Parse backend (ws13.strongapp.co)."""
+
+import json
 import os
 import sys
-import json
+from pprint import pprint
+
+import requests
+from requests_toolbelt.utils import dump
+
+# Environment variables that must be set, with the exit code used when missing.
+REQUIRED_SETTINGS = {
+    "strong_username": 1,
+    "strong_password": 2,
+    "strong_device_uuid": 3,
+    "strong_application_id": 4,
+}
+
+WORKOUT_INCLUDE = "parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise"
+EPOCH = "1970-01-01T00:00:00.000Z"
+REQUEST_TIMEOUT = 60
+REQUEST_ERRORS = (requests.RequestException, ValueError, KeyError, TypeError)
 
 
 class Strong:
+    """Wraps login and the workout queries used by the samples."""
+
     def __init__(self):
         self.endpoint = "https://ws13.strongapp.co"
-        self.strong_username = os.environ.get('strong_username')
-        self.strong_password = os.environ.get('strong_password')
-        self.strong_device_uuid = os.environ.get('strong_device_uuid')
-        self.strong_application_id = os.environ.get('strong_application_id')
+        self.credentials = {}
+        for name, exit_code in REQUIRED_SETTINGS.items():
+            value = os.environ.get(name)
+            if value is None:
+                print("Missing: " + name)
+                sys.exit(exit_code)
+            self.credentials[name] = value
         self.debug = False
-
-        if self.strong_username is None:
-            print("Missing: strong_username")
-            sys.exit(1)
-
-        if self.strong_password is None:
-            print("Missing: strong_password")
-            sys.exit(2)
-
-        if self.strong_device_uuid is None:
-            print("Missing: strong_device_uuid")
-            sys.exit(3)
-
-        if self.strong_application_id is None:
-            print("Missing: strong_application_id")
-            sys.exit(4)
+        self.response = None
+        self.session_token = None
+        self.user_object_id = None
 
         self.headers = {
-            'Host': 'ws13.strongapp.co',
-            'x-parse-application-id': self.strong_application_id,
-            'x-parse-app-build-version': '257',
-            'x-parse-app-display-version': '2.7.9',
-            'x-parse-os-version': '13',
-            'user-agent': 'Parse Android SDK API Level 33',
-            'x-parse-installation-id': self.strong_device_uuid,
-            'content-type': 'application/json',
-            'pragma': 'no-cache',
-            'cache-control': 'no-cache'
+            "Host": "ws13.strongapp.co",
+            "x-parse-application-id": self.credentials["strong_application_id"],
+            "x-parse-app-build-version": "257",
+            "x-parse-app-display-version": "2.7.9",
+            "x-parse-os-version": "13",
+            "user-agent": "Parse Android SDK API Level 33",
+            "x-parse-installation-id": self.credentials["strong_device_uuid"],
+            "content-type": "application/json",
+            "pragma": "no-cache",
+            "cache-control": "no-cache",
         }
 
-    def WebRequest(self, method, query, data=None):
+    def web_request(self, method, query, data=None):
+        """Send a request; True when the server answered with a 2xx status."""
         try:
+            url = self.endpoint + query
+            options = {"headers": self.headers, "timeout": REQUEST_TIMEOUT}
             if method == "POST":
-                self.response = requests.post(
-                    self.endpoint + query, json=data, headers=self.headers)
+                self.response = requests.post(url, json=data, **options)
             else:
-                self.response = requests.get(
-                    self.endpoint + query, headers=self.headers)
+                self.response = requests.get(url, **options)
 
             if self.debug:
-                data = dump.dump_all(self.response)
-                print(data.decode('utf-8'))
+                print(dump.dump_all(self.response).decode("utf-8"))
                 print(self.response.status_code)
                 pprint(self.response.text)
 
-            if self.response.ok:
-                return True
-
-            return False
-        except Exception as e:
+            return bool(self.response.ok)
+        except REQUEST_ERRORS as e:
             print(str(e))
             return False
 
-    def Login(self):
-        try:
-            data = {}
-            data["password"] = self.strong_password
-            data["username"] = self.strong_username
-            data["_method"] = "GET"
+    def _user_query(self, since_epoch, **extra):
+        """POST a Parse "GET" query filtered to this user's objects."""
+        where = {
+            "user": {
+                "__type": "Pointer",
+                "className": "_User",
+                "objectId": self.user_object_id,
+            }
+        }
+        if since_epoch:
+            where["updatedAt"] = {"$gt": {"__type": "Date", "iso": EPOCH}}
+        data = dict(extra)
+        data["where"] = json.dumps(where)
+        data["_method"] = "GET"
+        return data
 
-            res = self.WebRequest("POST", "/parse/login", data)
+    def login(self):
+        """Log in and keep the session token for the following requests."""
+        try:
+            data = {
+                "password": self.credentials["strong_password"],
+                "username": self.credentials["strong_username"],
+                "_method": "GET",
+            }
+            res = self.web_request("POST", "/parse/login", data)
 
             js = self.response.json()
             self.session_token = js["sessionToken"]
             self.user_object_id = js["objectId"]
 
-            self.headers['x-parse-session-token'] = self.session_token
+            self.headers["x-parse-session-token"] = self.session_token
             return res
-        except Exception as e:
+        except REQUEST_ERRORS as e:
             print(str(e))
             return False
 
-    def GetUser(self):
+    def get_user(self):
+        """Fetch the logged-in user's record."""
         try:
-            res = self.WebRequest(
-                "GET", "/parse/classes/_User/" + self.user_object_id)
-            return res
-        except Exception as e:
+            path = "/parse/classes/_User/" + self.user_object_id
+            return self.web_request("GET", path)
+        except REQUEST_ERRORS as e:
             print(str(e))
             return False
 
-    def GetWorkouts(self):
-        try:
-            where = {}
-            where["user"] = {}
-            where["user"]["__type"] = "Pointer"
-            where["user"]["className"] = "_User"
-            where["user"]["objectId"] = self.user_object_id
-            where["updatedAt"] = {}
-            where["updatedAt"]["$gt"] = {}
-            where["updatedAt"]["$gt"]["__type"] = "Date"
-            where["updatedAt"]["$gt"]["iso"] = "1970-01-01T00:00:00.000Z"
+    def get_workouts(self):
+        """Fetch up to 200 workouts with their routines and exercises."""
+        data = self._user_query(True, include=WORKOUT_INCLUDE, limit="200")
+        return self.web_request("POST", "/parse/classes/ParseWorkout", data)
 
-            data = {}
-            data["include"] = "parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise"
-            data["limit"] = "200"
-            data["where"] = json.dumps(where).replace('"', '\"')
-            data["_method"] = "GET"
+    def get_workouts_per_week(self):
+        """Fetch the workouts-per-week widget data."""
+        data = self._user_query(False)
+        return self.web_request("POST", "/parse/classes/ParseWidget", data)
 
-            res = self.WebRequest("POST", "/parse/classes/ParseWorkout", data)
+    def get_workouts_count(self):
+        """Fetch only the number of workouts."""
+        data = self._user_query(True, include=WORKOUT_INCLUDE, limit="0", count="1")
+        return self.web_request("POST", "/parse/classes/ParseWorkout", data)
 
-            return res
-        except Exception as e:
-            print(str(e))
-            return False
-
-    def GetWorkOutsPerWeek(self):
-        try:
-            where = {}
-            where["user"] = {}
-            where["user"]["__type"] = "Pointer"
-            where["user"]["className"] = "_User"
-            where["user"]["objectId"] = self.user_object_id
-
-            data = {}
-            data["_method"] = "GET"
-            data["where"] = json.dumps(where).replace('"', '\"')
-
-            res = self.WebRequest("POST", "/parse/classes/ParseWidget", data)
-            return res
-        except Exception as e:
-            print(str(e))
-            return False
-
-    def GetWorkOutsCount(self):
-        try:
-            where = {}
-            where["user"] = {}
-            where["user"]["__type"] = "Pointer"
-            where["user"]["className"] = "_User"
-            where["user"]["objectId"] = self.user_object_id
-            where["updatedAt"] = {}
-            where["updatedAt"]["$gt"] = {}
-            where["updatedAt"]["$gt"]["__type"] = "Date"
-            where["updatedAt"]["$gt"]["iso"] = "1970-01-01T00:00:00.000Z"
-
-            data = {}
-            data["include"] = "parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise"
-            data["limit"] = "0"
-            data["count"] = "1"
-            data["where"] = json.dumps(where).replace('"', '\"')
-            data["_method"] = "GET"
-
-            res = self.WebRequest("POST", "/parse/classes/ParseWorkout", data)
-            return res
-        except Exception as e:
-            print(str(e))
-            return False
-
-    def GetJSON(self):
+    def get_json(self):
+        """The last response body, decoded from JSON."""
         return self.response.json()
 
-    def GetText(self):
+    def get_text(self):
+        """The last response body as text."""
         return self.response.text
 
-    def SaveResponseToFile(self, filename):
+    def save_response_to_file(self, filename):
+        """Write the last response body to filename."""
         try:
-            save_file = open(filename, "w")
-            save_file.write(self.response.text)
-            save_file.close()
+            with open(filename, "w", encoding="utf-8") as save_file:
+                save_file.write(self.response.text)
             return True
-        except Exception as e:
+        except (OSError, AttributeError) as e:
             print(str(e))
             return False
+
+    # Original method names, kept so existing callers keep working.
+    WebRequest = web_request
+    Login = login
+    GetUser = get_user
+    GetWorkouts = get_workouts
+    GetWorkOutsPerWeek = get_workouts_per_week
+    GetWorkOutsCount = get_workouts_count
+    GetJSON = get_json
+    GetText = get_text
+    SaveResponseToFile = save_response_to_file
