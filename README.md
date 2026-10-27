@@ -1,16 +1,20 @@
 # strong-api
 
-I'm not currently developing this any more.  I leave this here for reference purposes only.  
+<p align="center">
+  <img src=".github/logo.png" alt="strongapp-api logo" width="128" />
+</p>
+
+I'm not currently developing this any more. I leave this here for reference purposes only.  
 This should not be used unless you plan on getting your account terminated or other possible consequences.  
-Unlawful use of an API could be determined illegal depending on your durisdiction, like unlawful entery into a house with an open door.  
+Unlawful use of an API could be determined illegal depending on your jurisdiction, like unlawful entry into a house with an open door.
 
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
-I've cancelled my subscription with strong and I've switched to using hevy.  
+I've cancelled my subscription with strong and I've switched to using hevy. <!-- codespell:ignore -->
 I'm no longer using the strong service and only used this for a short period of time.  
-At the time of writing the API, there was no expressed defintion of access to their API or otherwise, in their terms of service.  
-As per my email below to Cameron.  
+At the time of writing the API, there was no expressed definition of access to their API or otherwise, in their terms of service.  
+As per my email below to Cameron.
 
-Since i've switched to using Hevy, i may do some work over there.  
+Since i've switched to using Hevy, i may do some work over there. <!-- codespell:ignore -->
 [https://github.com/dmzoneill/hevyapp-api](https://github.com/dmzoneill/hevyapp-api)
 
 Adios!
@@ -42,26 +46,27 @@ Adios!
 
 ### Download
 
- - Android studio
- - [Charles proxy](https://www.charlesproxy.com/)
- - [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
- - [io.strongapp.strong apk](https://m.apkpure.com/strong-workout-tracker-gym-log/io.strongapp.strong)
+- Android studio
+- [Charles proxy](https://www.charlesproxy.com/)
+- [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
+- [io.strongapp.strong apk](https://m.apkpure.com/strong-workout-tracker-gym-log/io.strongapp.strong)
 
 ### Setup
 
-1. Open android studio
-2. Create an android virtual device
+1. Open Android studio
+2. Create an Android virtual device
 3. Boot the device
 4. Download the strong app apk
 5. Download apk-mitm
 6. Patch the apk as described on [apk-mitm](https://www.npmjs.com/package/apk-mitm/)
 7. Install charles proxy
-8. Install the certificate and setup the proxy on the android device as described here:
- https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/
-9. Using androind studio upload the patched APK to the android device and then install it
+8. Install the certificate and setup the proxy on the Android device as described here:
+   <https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/>
+9. Using Android Studio upload the patched APK to the Android device and then install it
 10. open strong app and login
 
 Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.
 
 ## Strong conversation
+
 ![image](https://user-images.githubusercontent.com/15192260/223532596-83b5856b-a620-41e5-aa61-ed257e9ab939.png)
