@@ -62,7 +62,7 @@ Adios!
 7. Install charles proxy
 8. Install the certificate and setup the proxy on the Android device as described here:
    <https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/>
-9. Using android studio upload the patched APK to the Android device and then install it
+9. Using Android Studio upload the patched APK to the Android device and then install it
 10. open strong app and login
 
 Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.
