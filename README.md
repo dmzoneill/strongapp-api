@@ -6,15 +6,15 @@
 
 I'm not currently developing this any more. I leave this here for reference purposes only.  
 This should not be used unless you plan on getting your account terminated or other possible consequences.  
-Unlawful use of an API could be determined illegal depending on your durisdiction, like unlawful entery into a house with an open door.
+Unlawful use of an API could be determined illegal depending on your jurisdiction, like unlawful entry into a house with an open door.
 
 Since strong don't want me making this public, I've decided to move on to a competitor app and accept the termination.  
-I've cancelled my subscription with strong and I've switched to using hevy.  
+I've cancelled my subscription with strong and I've switched to using hevy. <!-- codespell:ignore -->
 I'm no longer using the strong service and only used this for a short period of time.  
-At the time of writing the API, there was no expressed defintion of access to their API or otherwise, in their terms of service.  
+At the time of writing the API, there was no expressed definition of access to their API or otherwise, in their terms of service.  
 As per my email below to Cameron.
 
-Since i've switched to using Hevy, i may do some work over there.  
+Since i've switched to using Hevy, i may do some work over there. <!-- codespell:ignore -->
 [https://github.com/dmzoneill/hevyapp-api](https://github.com/dmzoneill/hevyapp-api)
 
 Adios!
@@ -62,7 +62,7 @@ Adios!
 7. Install charles proxy
 8. Install the certificate and setup the proxy on the Android device as described here:
    <https://blog.logrocket.com/test-debug-android-apps-with-charles-web-proxy/>
-9. Using androind studio upload the patched APK to the Android device and then install it
+9. Using android studio upload the patched APK to the Android device and then install it
 10. open strong app and login
 
 Strong should use the proxy with the previously installed certificate and in charles you can now see the decrypted https requests.
