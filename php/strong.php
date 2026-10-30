@@ -1,47 +1,53 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Dmzoneill\StrongApp;
+
+use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 
-class Strong
+final class Strong
 {
-    private $endpoint;
-    private $strong_username;
-    private $strong_password;
-    private $strong_device_uuid;
-    private $strong_application_id;
-    private $debug;
+    private string $endpoint;
+    private string $strong_username;
+    private string $strong_password;
+    private string $strong_device_uuid;
+    private string $strong_application_id;
+    private bool $debug;
 
-    private $headers;
-    private $response;
-    private $session_token;
-    private $user_object_id;
+    /** @var array<string, string> */
+    private array $headers;
+    private string $response = '';
+    private ?string $session_token = null;
+    private ?string $user_object_id = null;
 
     public function __construct()
     {
         $this->endpoint = 'https://ws13.strongapp.co';
-        $this->strong_username = getenv('strong_username');
-        $this->strong_password = getenv('strong_password');
-        $this->strong_device_uuid = getenv('strong_device_uuid');
-        $this->strong_application_id = getenv('strong_application_id');
+        $this->strong_username = (string) getenv('strong_username');
+        $this->strong_password = (string) getenv('strong_password');
+        $this->strong_device_uuid = (string) getenv('strong_device_uuid');
+        $this->strong_application_id = (string) getenv('strong_application_id');
         $this->debug = false;
 
-        if (!$this->strong_username) {
+        if ($this->strong_username === '') {
             echo 'Missing: strong_username';
             exit(1);
         }
 
-        if (!$this->strong_password) {
+        if ($this->strong_password === '') {
             echo 'Missing: strong_password';
             exit(2);
         }
 
-        if (!$this->strong_device_uuid) {
+        if ($this->strong_device_uuid === '') {
             echo 'Missing: strong_device_uuid';
             exit(3);
         }
 
-        if (!$this->strong_application_id) {
+        if ($this->strong_application_id === '') {
             echo 'Missing: strong_application_id';
             exit(4);
         }
@@ -60,7 +66,10 @@ class Strong
         ];
     }
 
-    public function WebRequest($method, $query, $data = null)
+    /**
+     * @param array<string, mixed>|null $data
+     */
+    public function webRequest(string $method, string $query, ?array $data = null): bool
     {
         try {
             $client = new Client(['base_uri' => $this->endpoint]);
@@ -71,30 +80,27 @@ class Strong
 
             if ($method === 'POST') {
                 $options['json'] = $data;
-                $this->response = $client->post($query, $options);
+                $result = $client->post($query, $options);
             } else {
-                $this->response = $client->get($query, $options);
+                $result = $client->get($query, $options);
             }
 
-            if ($this->debug) {
-                $body = (string) $this->response->getBody();
-                $statusCode = $this->response->getStatusCode();
-                var_dump($statusCode);
-                var_dump($body);
+            $this->response = (string) $result->getBody();
+            $statusCode = $result->getStatusCode();
+
+            if ($this->debug === true) {
+                error_log((string) $statusCode);
+                error_log($this->response);
             }
 
-            if ($this->response->getStatusCode() >= 200 && $this->response->getStatusCode() < 300) {
-                return true;
-            }
-
-            return false;
-        } catch (ClientException $e) {
+            return $statusCode >= 200 && $statusCode < 300;
+        } catch (GuzzleException $e) {
             echo $e->getMessage();
             return false;
         }
     }
 
-    public function login()
+    public function login(): bool
     {
         try {
             $data = array();
@@ -104,11 +110,17 @@ class Strong
 
             $res = $this->webRequest("POST", "/parse/login", $data);
 
-            $js = json_decode($this->response, true);
-            $this->session_token = $js["sessionToken"];
-            $this->user_object_id = $js["objectId"];
+            $js = $this->getJson();
+            $this->session_token = null;
+            if (isset($js["sessionToken"]) === true && is_string($js["sessionToken"]) === true) {
+                $this->session_token = $js["sessionToken"];
+            }
+            $this->user_object_id = null;
+            if (isset($js["objectId"]) === true && is_string($js["objectId"]) === true) {
+                $this->user_object_id = $js["objectId"];
+            }
 
-            $this->headers['x-parse-session-token'] = $this->session_token;
+            $this->headers['x-parse-session-token'] = (string) $this->session_token;
             return $res;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -116,10 +128,10 @@ class Strong
         }
     }
 
-    public function getUser()
+    public function getUser(): bool
     {
         try {
-            $res = $this->webRequest("GET", "/parse/classes/_User/" . $this->user_object_id);
+            $res = $this->webRequest("GET", "/parse/classes/_User/" . (string) $this->user_object_id);
             return $res;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -127,7 +139,7 @@ class Strong
         }
     }
 
-    public function getWorkouts()
+    public function getWorkouts(): bool
     {
         try {
             $where = array();
@@ -153,7 +165,7 @@ class Strong
         }
     }
 
-    public function getWorkoutsPerWeek()
+    public function getWorkoutsPerWeek(): bool
     {
         try {
             $where = array();
@@ -174,7 +186,7 @@ class Strong
         }
     }
 
-    public function GetWorkOutsCount()
+    public function getWorkoutsCount(): bool
     {
         try {
             $where = array(
@@ -200,7 +212,7 @@ class Strong
 
             $data["_method"] = "GET";
 
-            $res = $this->WebRequest("POST", "/parse/classes/ParseWorkout", $data);
+            $res = $this->webRequest("POST", "/parse/classes/ParseWorkout", $data);
 
             return $res;
         } catch (Exception $e) {
@@ -209,20 +221,28 @@ class Strong
         }
     }
 
-    public function GetJSON()
+    /**
+     * @return array<array-key, mixed>
+     */
+    public function getJson(): array
     {
-        return json_decode($this->response, true);
+        /** @var array<array-key, mixed>|scalar|null $decoded */
+        $decoded = json_decode($this->response, true);
+        return is_array($decoded) === true ? $decoded : [];
     }
 
-    public function GetText()
+    public function getText(): string
     {
         return $this->response;
     }
 
-    public function SaveResponseToFile($filename)
+    public function saveResponseToFile(string $filename): bool
     {
         try {
             $save_file = fopen($filename, "w");
+            if ($save_file === false) {
+                return false;
+            }
             fwrite($save_file, $this->response);
             fclose($save_file);
             return true;
