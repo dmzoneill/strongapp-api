@@ -136,9 +136,9 @@ class Strong
             $where["user"]["className"] = "_User";
             $where["user"]["objectId"] = $this->user_object_id;
             $where["updatedAt"] = array();
-            $where["updatedAt"]["$gt"] = array();
-            $where["updatedAt"]["$gt"]["__type"] = "Date";
-            $where["updatedAt"]["$gt"]["iso"] = "1970-01-01T00:00:00.000Z";
+            $where["updatedAt"]['$gt'] = array();
+            $where["updatedAt"]['$gt']["__type"] = "Date";
+            $where["updatedAt"]['$gt']["iso"] = "1970-01-01T00:00:00.000Z";
 
             $data = array();
             $data["include"] = "parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise";
@@ -184,7 +184,7 @@ class Strong
                     "objectId" => $this->user_object_id
                 ),
                 "updatedAt" => array(
-                    "$gt" => array(
+                    '$gt' => array(
                         "__type" => "Date",
                         "iso" => "1970-01-01T00:00:00.000Z"
                     )
