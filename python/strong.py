@@ -8,13 +8,14 @@ from pprint import pprint
 import requests
 from requests_toolbelt.utils import dump
 
-# Environment variables that must be set, with the exit code used when missing.
-REQUIRED_SETTINGS = {
-    "strong_username": 1,
-    "strong_password": 2,
-    "strong_device_uuid": 3,
-    "strong_application_id": 4,
-}
+# Environment variables that must be set. A missing one exits with its
+# 1-based position in this tuple (username=1 ... application id=4).
+REQUIRED_SETTINGS = (
+    "strong_username",
+    "strong_password",
+    "strong_device_uuid",
+    "strong_application_id",
+)
 
 WORKOUT_INCLUDE = "parseOriginRoutine,parseRoutine,parseSetGroups.parseExercise"
 EPOCH = "1970-01-01T00:00:00.000Z"
@@ -28,7 +29,7 @@ class Strong:
     def __init__(self):
         self.endpoint = "https://ws13.strongapp.co"
         self.credentials = {}
-        for name, exit_code in REQUIRED_SETTINGS.items():
+        for exit_code, name in enumerate(REQUIRED_SETTINGS, start=1):
             value = os.environ.get(name)
             if value is None:
                 print("Missing: " + name)
@@ -56,11 +57,12 @@ class Strong:
         """Send a request; True when the server answered with a 2xx status."""
         try:
             url = self.endpoint + query
-            options = {"headers": self.headers, "timeout": REQUEST_TIMEOUT}
+            headers, timeout = self.headers, REQUEST_TIMEOUT
             if method == "POST":
-                self.response = requests.post(url, json=data, **options)
+                resp = requests.post(url, json=data, headers=headers, timeout=timeout)
             else:
-                self.response = requests.get(url, **options)
+                resp = requests.get(url, headers=headers, timeout=timeout)
+            self.response = resp
 
             if self.debug:
                 print(dump.dump_all(self.response).decode("utf-8"))
