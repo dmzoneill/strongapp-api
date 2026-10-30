@@ -1,0 +1,10 @@
+{
+    "name": "dmzoneill/strongapp-api",
+    "description": "Unofficial Strong app API client",
+    "type": "library",
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=8.1",
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
