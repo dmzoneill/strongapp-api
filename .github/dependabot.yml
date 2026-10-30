@@ -14,3 +14,14 @@ updates:
       github-actions:
         patterns:
           - "*"
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    groups:
+      composer:
+        patterns:
+          - "*"
