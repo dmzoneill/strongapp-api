@@ -1,4 +1,3 @@
-import fs from "fs";
 import { env, exit } from "process";
 import request from "request";
 
@@ -207,11 +206,12 @@ class Strong {
     return this.response.text;
   }
 
-  async SaveResponseToFile(filename) {
+  // Write the last response body to a caller-supplied writable stream
+  // (e.g. fs.createWriteStream(path) opened by the caller).
+  async SaveResponseToStream(stream) {
     try {
-      let save_file = fs.createWriteStream(filename);
-      save_file.write(this.response.text);
-      save_file.close();
+      stream.write(this.response.text);
+      stream.end();
       return true;
     } catch (e) {
       console.log(e);
