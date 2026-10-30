@@ -88,7 +88,7 @@ final class Strong
             $this->response = (string) $result->getBody();
             $statusCode = $result->getStatusCode();
 
-            if ($this->debug) {
+            if ($this->debug === true) {
                 error_log((string) $statusCode);
                 error_log($this->response);
             }
@@ -111,12 +111,14 @@ final class Strong
             $res = $this->webRequest("POST", "/parse/login", $data);
 
             $js = $this->getJson();
-            $this->session_token = isset($js["sessionToken"]) && is_string($js["sessionToken"])
-                ? $js["sessionToken"]
-                : null;
-            $this->user_object_id = isset($js["objectId"]) && is_string($js["objectId"])
-                ? $js["objectId"]
-                : null;
+            $this->session_token = null;
+            if (isset($js["sessionToken"]) === true && is_string($js["sessionToken"]) === true) {
+                $this->session_token = $js["sessionToken"];
+            }
+            $this->user_object_id = null;
+            if (isset($js["objectId"]) === true && is_string($js["objectId"]) === true) {
+                $this->user_object_id = $js["objectId"];
+            }
 
             $this->headers['x-parse-session-token'] = (string) $this->session_token;
             return $res;
@@ -226,7 +228,7 @@ final class Strong
     {
         /** @var array<array-key, mixed>|scalar|null $decoded */
         $decoded = json_decode($this->response, true);
-        return is_array($decoded) ? $decoded : [];
+        return is_array($decoded) === true ? $decoded : [];
     }
 
     public function getText(): string
